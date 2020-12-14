@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>Roda das emoções</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    <div id="container" style="height: 95vh;"></div>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/sunburst.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+    <script>
+    var emocoes = [{
+        id: 'medo',
+        colors: ['#00A3B9', '#12BCCA', '#00A3B9'],
+        children: {
+            'assutado': ['desamparado', 'amedrontado'],
+            'ansioso': ['sobrecarregado', 'preocupado'],
+            'inseguro': ['inadequado', 'inferior'],
+            'fraco': ['inútil', 'insignificante'],
+            'rejeitado': ['excluído', 'perseguido'],
+            'ameaçado': ['nervoso', 'exposto'],
+        },
+    },{
+        id: 'raiva',
+        colors: ['#7572B4', '#8C8CC4', '#7572B4'],
+        children: {
+            'decepção': ['traído', 'desrespeitado'],
+            'humilhação': ['desrespeitado', 'ridicularizado'],
+            'amargo': ['indignado', 'violado'],
+            'bravo': ['furioso', 'ciumento'],
+            'agressivo': ['provocado', 'hostil'],
+            'frustrado': ['enfurecido', 'incomodado'],
+            'distante': ['afastado', 'anestesiado'],
+            'crítico': ['cético', 'desdenhoso'],
+        },
+    },{
+        id: 'nojo',
+        colors: ['#AB7BB5', '#BC95C3', '#AB7BB5'],
+        children: {
+            'desaprovado': ['julgado', 'envergonhado'],
+            'desapontado': ['chocado', 'revoltado'],
+            'horrível': ['nauseado', 'detestável'],
+            'repelido': ['horrorizado', 'hesitante'],
+        },
+    },{
+        id: 'tristeza',
+        colors: ['#CE7C87', '#E297A5', '#CE7C87'],
+        children: {
+            'dor': ['envergonhado', 'desapontado'],
+            'deprimido': ['inferior', 'vazio'],
+            'culpado': ['com remorso', 'envergonhado'],
+            'desespero': ['impotente', 'pesar'],
+            'vulnerável': ['fragilizado', 'vitimizado'],
+            'solitário': ['isolado', 'abandonado'],
+        },
+    },{
+        id: 'alegria',
+        colors: ['#E1876E', '#EF9783', '#E1876E'],
+        children: {
+            'otimista': ['esperançoso', 'inspirado'],
+            'confiante': ['íntimo', 'sensível'],
+            'pacífico': ['grato', 'amoroso'],
+            'poderoso': ['corajoso', 'criativo'],
+            'aceito': ['respeitado', 'valorizado'],
+            'orgulhoso': ['bem-sucedido', 'confiante'],
+            'interessado': ['curioso', 'inquisitivo'],
+            'satisfeito': ['livre', 'jubilante'],
+            'brincalhão': ['atrevido', 'excitado'],
+        },
+    },{
+        id: 'surpreso',
+        colors: ['#E5A44B', '#ECB45D', '#E5A44B'],
+        children: {
+            'excitado': ['enérgico', 'impaciente'],
+            'maravilhado': ['admirado', 'atônito'],
+            'confuso': ['perplexo', 'desilusão'],
+            'assustado': ['chocado', 'consternado'],
+        },
+    },{
+        id: 'mal',
+        colors: ['#35BA9F', '#5CC2AF', '#35BA9F'],
+        children: {
+            'cansado': ['desfocado', 'sonolento'],
+            'estressado': ['sobrecarregado', 'fora de controle'],
+            'ocupado': ['apressado', 'pressionado'],
+            'entediado': ['apático', 'indiferente'],
+        },
+    }];
+    var data = data = [];
+    emocoes.forEach(emocao => {
+        data.push({
+            id: emocao.id,
+            color: emocao.colors[0],
+            parent: '',
+        });
+        for(let inner in emocao.children) {
+            data.push({
+                id: emocao.id + inner,
+                name: inner,
+                color: emocao.colors[1],
+                parent: emocao.id,
+            });
+            emocao.children[inner].forEach(outer => {
+                data.push({
+                    id: emocao.id + inner + outer,
+                    name: outer,
+                    color: emocao.colors[0],
+                    parent: emocao.id + inner,
+                    value: 1
+                });
+            });
+        }
+    });
+    Highcharts.chart('container', {
+        title: { text: 'Roda das emoções' },
+        subtitle: { enabled: false },
+        series: [{
+            type: 'sunburst',
+            data: data,
+            allowDrillToNode: true,
+            cursor: 'pointer',
+            dataLabels: {
+                format: '{point.name}',
+                rotationMode: 'circular',
+                style: {
+                    fontSize: '9px',
+                    fontWeight: 400,
+                    textOutline: 0
+                },
+                color: '#FFF',
+            },
+            levels: [{
+                level: 1,
+                dataLabels: {
+                    rotationMode: 'perpendicular'
+                },
+                levelSize: {
+                    unit: 'percentage',
+                    value: 25,
+                },
+            },{
+                level: 2,
+                levelSize: {
+                    unit: 'percentage',
+                    value: 35,
+                },
+            },{
+                level: 3,
+                levelSize: {
+                    unit: 'percentage',
+                    value: 40,
+                },
+            }]
+
+        }],
+        credits: { enabled: false },
+        tooltip: { enabled: false }
+    });
+    </script>
+</body>
+</html>
