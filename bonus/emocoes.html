@@ -15,7 +15,7 @@
     <script>
     var emocoes = [{
         id: 'medo',
-        colors: ['#00A3B9', '#12BCCA', '#00A3B9'],
+        colors: ['#00A3B9', '#12BCCA', '#04c3d4'],
         children: {
             'assutado': ['desamparado', 'amedrontado'],
             'ansioso': ['sobrecarregado', 'preocupado'],
@@ -26,7 +26,7 @@
         },
     },{
         id: 'raiva',
-        colors: ['#7572B4', '#8C8CC4', '#7572B4'],
+        colors: ['#7572B4', '#8C8CC4', '#7B7FBA'],
         children: {
             'decepção': ['traído', 'desrespeitado'],
             'humilhação': ['desrespeitado', 'ridicularizado'],
@@ -39,7 +39,7 @@
         },
     },{
         id: 'nojo',
-        colors: ['#AB7BB5', '#BC95C3', '#AB7BB5'],
+        colors: ['#AB7BB5', '#BC95C3', '#cc99c2'],
         children: {
             'desaprovado': ['julgado', 'envergonhado'],
             'desapontado': ['chocado', 'revoltado'],
@@ -48,7 +48,7 @@
         },
     },{
         id: 'tristeza',
-        colors: ['#CE7C87', '#E297A5', '#CE7C87'],
+        colors: ['#CE7C87', '#E297A5', '#c28a94'],
         children: {
             'dor': ['envergonhado', 'desapontado'],
             'deprimido': ['inferior', 'vazio'],
@@ -59,7 +59,7 @@
         },
     },{
         id: 'alegria',
-        colors: ['#E1876E', '#EF9783', '#E1876E'],
+        colors: ['#E1876E', '#EF9783', '#e39d8d'],
         children: {
             'otimista': ['esperançoso', 'inspirado'],
             'confiante': ['íntimo', 'sensível'],
@@ -73,7 +73,7 @@
         },
     },{
         id: 'surpreso',
-        colors: ['#E5A44B', '#ECB45D', '#E5A44B'],
+        colors: ['#E5A44B', '#ECB45D', '#d6ac69'],
         children: {
             'excitado': ['enérgico', 'impaciente'],
             'maravilhado': ['admirado', 'atônito'],
@@ -82,7 +82,7 @@
         },
     },{
         id: 'mal',
-        colors: ['#35BA9F', '#5CC2AF', '#35BA9F'],
+        colors: ['#35BA9F', '#5CC2AF', '#70b8aa'],
         children: {
             'cansado': ['desfocado', 'sonolento'],
             'estressado': ['sobrecarregado', 'fora de controle'],
@@ -108,7 +108,7 @@
                 data.push({
                     id: emocao.id + inner + outer,
                     name: outer,
-                    color: emocao.colors[0],
+                    color: emocao.colors[2],
                     parent: emocao.id + inner,
                     value: 1
                 });
@@ -127,7 +127,7 @@
                 format: '{point.name}',
                 rotationMode: 'circular',
                 style: {
-                    fontSize: '11px',
+                    fontSize: '13px',
                     fontWeight: 400,
                     textOutline: 0
                 },
